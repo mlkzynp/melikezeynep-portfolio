@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melike Zeynep Şen — Web Geliştirici Portföy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: { 50:'#eff6ff', 100:'#dbeafe', 200:'#bfdbfe', 300:'#93c5fd', 400:'#60a5fa', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="font-sans antialiased">
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           TOAST CONTAINER                ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="toastContainer" class="fixed top-6 right-6 z-[9999] flex flex-col gap-3 max-w-sm"></div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           NAVIGATION                     ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background:rgba(250,250,249,.9);backdrop-filter:blur(12px)">
+  <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-2 group">
+      <div class="w-9 h-9 rounded-lg bg-brand-500 flex items-center justify-center text-white font-serif font-semibold text-lg group-hover:scale-105 transition-transform">M</div>
+      <span class="font-serif font-medium text-lg" style="color:var(--text-primary)">Melike Zeynep</span>
+    </a>
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li><a href="#about" class="nav-link text-sm font-medium hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">Hakkımda</a></li>
+      <li><a href="#skills" class="nav-link text-sm font-medium hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">Yetenekler</a></li>
+      <li><a href="#projects" class="nav-link text-sm font-medium hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">Projeler</a></li>
+      <li><a href="#experience" class="nav-link text-sm font-medium hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">Deneyim</a></li>
+      <li><a href="#contact" class="nav-link text-sm font-medium hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">İletişim</a></li>
+    </ul>
+    <div class="flex items-center gap-3">
+      <!-- Dark Mode Toggle -->
+      <button id="themeToggle" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors" title="Tema Değiştir">
+        <span class="iconify sun-icon" data-icon="lucide:sun" data-width="20" style="color:var(--text-secondary)"></span>
+        <span class="iconify moon-icon hidden" data-icon="lucide:moon" data-width="20" style="color:var(--text-secondary)"></span>
+      </button>
+      <!-- Admin Button -->
+      <button id="adminBtn" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors" title="Admin Girişi">
+        <span class="iconify" data-icon="lucide:shield" data-width="18" style="color:var(--text-muted)"></span>
+      </button>
+      <!-- Mobile Menu Toggle -->
+      <button id="mobileMenuBtn" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors">
+        <span class="iconify" data-icon="lucide:menu" data-width="22" style="color:var(--text-primary)"></span>
+      </button>
+    </div>
+  </nav>
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileMenu" class="fixed inset-0 z-50 hidden" style="background:rgba(12,10,9,.95)">
+    <div class="flex flex-col items-center justify-center h-full gap-8">
+      <button id="mobileMenuClose" class="absolute top-5 right-6"><span class="iconify text-white" data-icon="lucide:x" data-width="28"></span></button>
+      <a href="#about" class="mobile-nav text-2xl text-white font-light hover:text-brand-400 transition-colors">Hakkımda</a>
+      <a href="#skills" class="mobile-nav text-2xl text-white font-light hover:text-brand-400 transition-colors">Yetenekler</a>
+      <a href="#projects" class="mobile-nav text-2xl text-white font-light hover:text-brand-400 transition-colors">Projeler</a>
+      <a href="#experience" class="mobile-nav text-2xl text-white font-light hover:text-brand-400 transition-colors">Deneyim</a>
+      <a href="#contact" class="mobile-nav text-2xl text-white font-light hover:text-brand-400 transition-colors">İletişim</a>
+    </div>
+  </div>
+</header>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           HERO SECTION                   ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Slider Backgrounds -->
+  <div class="absolute inset-0">
+    <div class="hero-slide active" style="background:url('https://picsum.photos/seed/dev-workspace/1920/1080.jpg') center/cover no-repeat"></div>
+    <div class="hero-slide" style="background:url('https://picsum.photos/seed/coding-screen/1920/1080.jpg') center/cover no-repeat"></div>
+    <div class="hero-slide" style="background:url('https://picsum.photos/seed/tech-office/1920/1080.jpg') center/cover no-repeat"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(28,25,23,.65),rgba(28,25,23,.4) 60%,#fafaf9)"></div>
+    <div class="dark absolute inset-0" style="background:linear-gradient(to bottom,rgba(12,10,9,.7),rgba(12,10,9,.5) 60%,#0c0a09)"></div>
+  </div>
+  <!-- Content -->
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    <p class="text-xs font-medium tracking-[.25em] uppercase text-brand-300 mb-6">Web Geliştirici</p>
+    <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight leading-[1.1] mb-6">
+      Merhaba, ben <span class="italic text-brand-300">Melike Zeynep</span>
+    </h1>
+    <p class="text-lg md:text-xl text-stone-300 font-light leading-relaxed mb-2">
+      <span id="typingText"></span><span class="typing-cursor"></span>
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+      <a href="#projects" class="px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-full transition-all hover:scale-105 shadow-lg">
+        Projelerimi Gör
+      </a>
+      <a href="#contact" class="px-8 py-3.5 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-medium rounded-full hover:bg-white/20 transition-all">
+        İletişime Geç
+      </a>
+    </div>
+    <!-- Social Links -->
+    <div class="flex items-center justify-center gap-5 mt-10">
+      <a href="#" class="text-white/70 hover:text-white transition-colors"><span class="iconify" data-icon="mdi:github" data-width="24"></span></a>
+      <a href="#" class="text-white/70 hover:text-white transition-colors"><span class="iconify" data-icon="mdi:linkedin" data-width="24"></span></a>
+      <a href="#" class="text-white/70 hover:text-white transition-colors"><span class="iconify" data-icon="mdi:twitter" data-width="24"></span></a>
+      <a href="#" class="text-white/70 hover:text-white transition-colors"><span class="iconify" data-icon="mdi:instagram" data-width="24"></span></a>
+    </div>
+  </div>
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+    <span class="text-xs tracking-widest uppercase text-stone-400">Kaydır</span>
+    <div class="w-5 h-8 border-2 border-stone-400 rounded-full flex justify-center pt-1">
+      <div class="w-1 h-2 bg-stone-400 rounded-full animate-bounce"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           ABOUT SECTION                  ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section id="about" class="py-24 px-6 fade-section">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <!-- Photo -->
+      <figure class="relative">
+        <div class="overflow-hidden rounded-2xl shadow-2xl">
+          <img src="https://picsum.photos/seed/portrait-developer/600/700.jpg" alt="Melike Zeynep Şen" class="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="absolute -bottom-6 -right-6 bg-brand-500 text-white rounded-2xl p-6 shadow-xl hidden md:block">
+          <p class="text-3xl font-serif font-medium">3+</p>
+          <p class="text-sm font-light">Proje</p>
+        </div>
+      </figure>
+      <!-- Text -->
+      <div>
+        <p class="text-xs font-semibold tracking-[.2em] uppercase text-brand-500 mb-4">Hakkımda</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-medium tracking-tight mb-6" style="color:var(--text-primary)">
+          Tutkuyla Kod Yazıyorum
+        </h2>
+        <p class="text-base leading-relaxed mb-4" style="color:var(--text-secondary)">
+          Merhaba! Ben Melike Zeynep Şen. Web teknolojilerine büyük tutkuyla bağlı bir frontend geliştiriciyim.
+          Kullanıcı deneyimini ön planda tutan, modern ve responsive web uygulamaları geliştirmeyi seviyorum.
+        </p>
+        <p class="text-base leading-relaxed mb-8" style="color:var(--text-secondary)">
+          HTML5, CSS3 ve JavaScript ile başladığım yolculuğumda, her gün yeni teknolojiler öğrenerek kendimi geliştiriyorum.
+          Medicana'da yaptığım staj, endüstriyel tecrübe kazanmamı ve ekip çalışması becerilerimi geliştirmemi sağladı.
+        </p>
+        <!-- Quick Info Table -->
+        <table class="data-table w-full text-sm mb-8 rounded-xl overflow-hidden" style="background:var(--bg-card);border:1px solid var(--border)">
+          <tbody>
+            <tr><td class="font-medium" style="color:var(--text-primary);width:35%">İsim</td><td style="color:var(--text-secondary)">Melike Zeynep Şen</td></tr>
+            <tr><td class="font-medium" style="color:var(--text-primary)">Konum</td><td style="color:var(--text-secondary)">İstanbul, Türkiye</td></tr>
+            <tr><td class="font-medium" style="color:var(--text-primary)">E-posta</td><td style="color:var(--text-secondary)">melike@example.com</td></tr>
+            <tr><td class="font-medium" style="color:var(--text-primary)">Eğitim</td><td style="color:var(--text-secondary)">Web Teknolojileri</td></tr>
+            <tr><td class="font-medium" style="color:var(--text-primary)">Durum</td><td style="color:var(--text-secondary)"><span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 bg-green-500 rounded-full"></span>İş fırsatlarına açık</span></td></tr>
+          </tbody>
+        </table>
+        <a href="#contact" class="inline-flex items-center gap-2 px-8 py-3.5 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 text-sm font-medium rounded-full hover:scale-105 transition-all shadow-lg">
+          <span class="iconify" data-icon="lucide:mail" data-width="16"></span>
+          İletişime Geç
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           SKILLS SECTION                 ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section id="skills" class="py-24 px-6 fade-section" style="background:var(--bg-secondary)">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-xs font-semibold tracking-[.2em] uppercase text-brand-500 mb-4">Yeteneklerim</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-medium tracking-tight" style="color:var(--text-primary)">Teknoloji Yığını</h2>
+    </div>
+    <!-- Skills Grid -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      <!-- Frontend -->
+      <div class="rounded-2xl p-8 card-hover" style="background:var(--bg-card);border:1px solid var(--border);box-shadow:var(--shadow)">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center mb-5">
+          <span class="iconify text-brand-500" data-icon="lucide:monitor" data-width="24"></span>
+        </div>
+        <h3 class="text-lg font-medium mb-4" style="color:var(--text-primary)">Frontend</h3>
+        <div class="space-y-4">
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">HTML5</span><span class="font-medium" style="color:var(--text-primary)">95%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="95%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">CSS3 / Flexbox / Grid</span><span class="font-medium" style="color:var(--text-primary)">90%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="90%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">JavaScript / DOM</span><span class="font-medium" style="color:var(--text-primary)">85%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="85%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">Responsive Tasarım</span><span class="font-medium" style="color:var(--text-primary)">90%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="90%"></div></div></div>
+        </div>
+      </div>
+      <!-- Backend -->
+      <div class="rounded-2xl p-8 card-hover" style="background:var(--bg-card);border:1px solid var(--border);box-shadow:var(--shadow)">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center mb-5">
+          <span class="iconify text-brand-500" data-icon="lucide:server" data-width="24"></span>
+        </div>
+        <h3 class="text-lg font-medium mb-4" style="color:var(--text-primary)">Backend</h3>
+        <div class="space-y-4">
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">PHP</span><span class="font-medium" style="color:var(--text-primary)">75%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="75%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">MySQL</span><span class="font-medium" style="color:var(--text-primary)">70%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="70%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">REST API</span><span class="font-medium" style="color:var(--text-primary)">65%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="65%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">AJAX / Fetch</span><span class="font-medium" style="color:var(--text-primary)">80%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="80%"></div></div></div>
+        </div>
+      </div>
+      <!-- Tools -->
+      <div class="rounded-2xl p-8 card-hover" style="background:var(--bg-card);border:1px solid var(--border);box-shadow:var(--shadow)">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center mb-5">
+          <span class="iconify text-brand-500" data-icon="lucide:wrench" data-width="24"></span>
+        </div>
+        <h3 class="text-lg font-medium mb-4" style="color:var(--text-primary)">Araçlar</h3>
+        <div class="space-y-4">
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">Git / GitHub</span><span class="font-medium" style="color:var(--text-primary)">80%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="80%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">VS Code</span><span class="font-medium" style="color:var(--text-primary)">90%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="90%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">Figma</span><span class="font-medium" style="color:var(--text-primary)">60%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="60%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span style="color:var(--text-secondary)">XAMPP / Apache</span><span class="font-medium" style="color:var(--text-primary)">75%</span></div><div class="h-2 rounded-full" style="background:var(--border)"><div class="skill-fill h-2 rounded-full bg-brand-500" data-width="75%"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technology Table -->
+    <div class="rounded-2xl overflow-hidden shadow-lg" style="background:var(--bg-card);border:1px solid var(--border)">
+      <div class="p-6 border-b" style="border-color:var(--border)">
+        <h3 class="font-serif text-xl font-medium" style="color:var(--text-primary)">Teknoloji Karşılaştırma Tablosu</h3>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="data-table w-full">
+          <thead>
+            <tr>
+              <th>Teknoloji</th>
+              <th>Tür</th>
+              <th>Seviye</th>
+              <th>Deneyim</th>
+              <th>Durum</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="color:var(--text-primary);font-weight:500">HTML5</td><td style="color:var(--text-secondary)">Markup</td><td>İleri</td><td>2+ Yıl</td><td><span class="inline-flex items-center gap-1.5 text-green-600 text-xs font-medium"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>Aktif</span></td></tr>
+            <tr><td style="color:var(--text-primary);font-weight:500">CSS3</td><td style="color:var(--text-secondary)">Styling</td><td>İleri</td><td>2+ Yıl</td><td><span class="inline-flex items-center gap-1.5 text-green-600 text-xs font-medium"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>Aktif</span></td></tr>
+            <tr><td style="color:var(--text-primary);font-weight:500">JavaScript</td><td style="color:var(--text-secondary)">Programlama</td><td>Orta-İleri</td><td>1.5 Yıl</td><td><span class="inline-flex items-center gap-1.5 text-green-600 text-xs font-medium"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>Aktif</span></td></tr>
+            <tr><td style="color:var(--text-primary);font-weight:500">PHP</td><td style="color:var(--text-secondary)">Backend</td><td>Orta</td><td>1 Yıl</td><td><span class="inline-flex items-center gap-1.5 text-green-600 text-xs font-medium"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>Aktif</span></td></tr>
+            <tr><td style="color:var(--text-primary);font-weight:500">MySQL</td><td style="color:var(--text-secondary)">Veritabanı</td><td>Orta</td><td>1 Yıl</td><td><span class="inline-flex items-center gap-1.5 text-green-600 text-xs font-medium"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>Aktif</span></td></tr>
+            <tr><td style="color:var(--text-primary);font-weight:500">Tailwind CSS</td><td style="color:var(--text-secondary)">Framework</td><td>Orta-İleri</td><td>1 Yıl</td><td><span class="inline-flex items-center gap-1.5 text-green-600 text-xs font-medium"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>Aktif</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           PROJECTS SECTION               ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section id="projects" class="py-24 px-6 fade-section">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <p class="text-xs font-semibold tracking-[.2em] uppercase text-brand-500 mb-4">Projelerim</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-medium tracking-tight" style="color:var(--text-primary)">Son Çalışmalar</h2>
+    </div>
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+      <button class="filter-btn active px-5 py-2 text-sm font-medium rounded-full border transition-all" data-filter="all" style="border-color:var(--border);color:var(--text-secondary)">Tümü</button>
+      <button class="filter-btn px-5 py-2 text-sm font-medium rounded-full border transition-all" data-filter="HTML5" style="border-color:var(--border);color:var(--text-secondary)">HTML5</button>
+      <button class="filter-btn px-5 py-2 text-sm font-medium rounded-full border transition-all" data-filter="CSS3" style="border-color:var(--border);color:var(--text-secondary)">CSS3</button>
+      <button class="filter-btn px-5 py-2 text-sm font-medium rounded-full border transition-all" data-filter="JavaScript" style="border-color:var(--border);color:var(--text-secondary)">JavaScript</button>
+    </div>
+    <!-- Projects Grid (Dynamic) -->
+    <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║         EXPERIENCE SECTION               ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section id="experience" class="py-24 px-6 fade-section" style="background:var(--bg-secondary)">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-xs font-semibold tracking-[.2em] uppercase text-brand-500 mb-4">Deneyim</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-medium tracking-tight" style="color:var(--text-primary)">Kariyer Yolculuğum</h2>
+    </div>
+    <!-- Timeline -->
+    <div class="relative max-w-4xl mx-auto">
+      <div class="timeline-line hidden md:block"></div>
+      <!-- Education -->
+      <div class="relative flex flex-col md:flex-row items-center mb-16">
+        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+          <div class="rounded-2xl p-8 card-hover" style="background:var(--bg-card);border:1px solid var(--border);box-shadow:var(--shadow)">
+            <div class="flex items-center gap-3 md:justify-end mb-3">
+              <span class="iconify text-brand-500" data-icon="lucide:graduation-cap" data-width="22"></span>
+              <h3 class="text-lg font-medium" style="color:var(--text-primary)">Web Teknolojileri Eğitimi</h3>
+            </div>
+            <p class="text-sm mb-2" style="color:var(--text-secondary)">Üniversite — 2022 – Devam Ediyor</p>
+            <p class="text-sm leading-relaxed" style="color:var(--text-muted)">Web teknolojileri alanında kapsamlı eğitim alarak HTML5, CSS3, JavaScript, PHP ve MySQL teknolojilerinde uzmanlaşıyorum.</p>
+          </div>
+        </div>
+        <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-brand-500 rounded-full border-4 border-white dark:border-stone-900 z-10"></div>
+        <div class="md:w-1/2 md:pl-12"></div>
+      </div>
+      <!-- Medicana Internship -->
+      <div class="relative flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 md:pr-12"></div>
+        <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-brand-500 rounded-full border-4 border-white dark:border-stone-900 z-10"></div>
+        <div class="md:w-1/2 md:pl-12">
+          <div class="rounded-2xl p-8 card-hover" style="background:var(--bg-card);border:1px solid var(--border);box-shadow:var(--shadow)">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-brand-500" data-icon="lucide:briefcase" data-width="22"></span>
+              <h3 class="text-lg font-medium" style="color:var(--text-primary)">Frontend Stajyeri</h3>
+            </div>
+            <p class="text-sm font-medium text-brand-500 mb-1">Medicana Sağlık Grubu</p>
+            <p class="text-sm mb-3" style="color:var(--text-secondary)">Yaz 2024 — 3 Ay</p>
+            <ul class="space-y-2 text-sm" style="color:var(--text-muted)">
+              <li class="flex items-start gap-2"><span class="iconify text-brand-500 mt-0.5 shrink-0" data-icon="lucide:check" data-width="14"></span>Hastane web sitesinin frontend geliştirme süreçlerine katılım</li>
+              <li class="flex items-start gap-2"><span class="iconify text-brand-500 mt-0.5 shrink-0" data-icon="lucide:check" data-width="14"></span>Responsive tasarım ve cross-browser uyumluluk testleri</li>
+              <li class="flex items-start gap-2"><span class="iconify text-brand-500 mt-0.5 shrink-0" data-icon="lucide:check" data-width="14"></span>UI/UX tasarım kararlarına katkı ve CSS optimizasyonları</li>
+              <li class="flex items-start gap-2"><span class="iconify text-brand-500 mt-0.5 shrink-0" data-icon="lucide:check" data-width="14"></span>Agile/Scrum metodolojisi ile ekip çalışması deneyimi</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           CONTACT SECTION                ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section id="contact" class="py-24 px-6 fade-section">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-xs font-semibold tracking-[.2em] uppercase text-brand-500 mb-4">İletişim</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-medium tracking-tight" style="color:var(--text-primary)">Benimle İletişime Geçin</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-16">
+      <!-- Contact Info -->
+      <div>
+        <p class="text-base leading-relaxed mb-8" style="color:var(--text-secondary)">
+          Bir projeniz mi var? Birlikte çalışmak istiyor musunuz? Ya da sadece merhaba demek istiyorsanız,
+          aşağıdaki formu doldurun veya doğrudan iletişim bilgilerime ulaşın.
+        </p>
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:var(--accent-light)">
+              <span class="iconify text-brand-500" data-icon="lucide:mail" data-width="20"></span>
+            </div>
+            <div>
+              <p class="text-sm font-medium" style="color:var(--text-primary)">E-posta</p>
+              <p class="text-sm" style="color:var(--text-secondary)">melike@example.com</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:var(--accent-light)">
+              <span class="iconify text-brand-500" data-icon="lucide:map-pin" data-width="20"></span>
+            </div>
+            <div>
+              <p class="text-sm font-medium" style="color:var(--text-primary)">Konum</p>
+              <p class="text-sm" style="color:var(--text-secondary)">İstanbul, Türkiye</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:var(--accent-light)">
+              <span class="iconify text-brand-500" data-icon="lucide:phone" data-width="20"></span>
+            </div>
+            <div>
+              <p class="text-sm font-medium" style="color:var(--text-primary)">Telefon</p>
+              <p class="text-sm" style="color:var(--text-secondary)">+90 555 123 4567</p>
+            </div>
+          </div>
+        </div>
+        <!-- Social -->
+        <div class="flex items-center gap-4 mt-10">
+          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-brand-100 dark:hover:bg-brand-900/30" style="border:1px solid var(--border);color:var(--text-secondary)"><span class="iconify" data-icon="mdi:github" data-width="20"></span></a>
+          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-brand-100 dark:hover:bg-brand-900/30" style="border:1px solid var(--border);color:var(--text-secondary)"><span class="iconify" data-icon="mdi:linkedin" data-width="20"></span></a>
+          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-brand-100 dark:hover:bg-brand-900/30" style="border:1px solid var(--border);color:var(--text-secondary)"><span class="iconify" data-icon="mdi:twitter" data-width="20"></span></a>
+        </div>
+      </div>
+      <!-- Contact Form -->
+      <form id="contactForm" novalidate class="space-y-5">
+        <div>
+          <label for="contactName" class="block text-sm font-medium mb-2" style="color:var(--text-primary)">İsim *</label>
+          <input type="text" id="contactName" name="name" required minlength="2" placeholder="Adınız Soyadınız" class="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-brand-500" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary)">
+          <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+        <div>
+          <label for="contactEmail" class="block text-sm font-medium mb-2" style="color:var(--text-primary)">E-posta *</label>
+          <input type="email" id="contactEmail" name="email" required placeholder="ornek@email.com" class="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-brand-500" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary)">
+          <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+        <div>
+          <label for="contactSubject" class="block text-sm font-medium mb-2" style="color:var(--text-primary)">Konu *</label>
+          <input type="text" id="contactSubject" name="subject" required minlength="3" placeholder="Mesajınızın konusu" class="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-brand-500" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary)">
+          <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+        <div>
+          <label for="contactMessage" class="block text-sm font-medium mb-2" style="color:var(--text-primary)">Mesaj *</label>
+          <textarea id="contactMessage" name="message" required minlength="10" rows="5" placeholder="Mesajınızı buraya yazın..." class="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-brand-500 resize-none" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-primary)"></textarea>
+          <p class="error-msg text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+        <button type="submit" class="w-full py-3.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-xl transition-all hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2">
+          <span class="iconify" data-icon="lucide:send" data-width="16"></span>
+          Mesaj Gönder
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║           FOOTER                         ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<footer class="py-16 px-6" style="background:var(--bg-secondary);border-top:1px solid var(--border)">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-2 mb-4">
+        <div class="w-9 h-9 rounded-lg bg-brand-500 flex items-center justify-center text-white font-serif font-semibold text-lg">M</div>
+        <span class="font-serif font-medium text-lg" style="color:var(--text-primary)">Melike Zeynep Şen</span>
+      </div>
+      <p class="text-sm leading-relaxed max-w-md" style="color:var(--text-secondary)">
+        Modern web teknolojileriyle kullanıcı odaklı, erişilebilir ve estetik web uygulamaları geliştiren bir frontend geliştirici.
+      </p>
+    </div>
+    <div>
+      <h4 class="text-sm font-semibold uppercase tracking-wider mb-4" style="color:var(--text-primary)">Hızlı Bağlantılar</h4>
+      <ul class="space-y-2">
+        <li><a href="#about" class="text-sm hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">Hakkımda</a></li>
+        <li><a href="#skills" class="text-sm hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">Yetenekler</a></li>
+        <li><a href="#projects" class="text-sm hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">Projeler</a></li>
+        <li><a href="#contact" class="text-sm hover:text-brand-500 transition-colors" style="color:var(--text-secondary)">İletişim</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-sm font-semibold uppercase tracking-wider mb-4" style="color:var(--text-primary)">Sosyal Medya</h4>
+      <ul class="space-y-2">
+        <li><a href="#" class="text-sm hover:text-brand-500 transition-colors flex items-center gap-2" style="color:var(--text-secondary)"><span class="iconify" data-icon="mdi:github" data-width="16"></span>GitHub</a></li>
+        <li><a href="#" class="text-sm hover:text-brand-500 transition-colors flex items-center gap-2" style="color:var(--text-secondary)"><span class="iconify" data-icon="mdi:linkedin" data-width="16"></span>LinkedIn</a></li>
+        <li><a href="#" class="text-sm hover:text-brand-500 transition-colors flex items-center gap-2" style="color:var(--text-secondary)"><span class="iconify" data-icon="mdi:twitter" data-width="16"></span>Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style="border-top:1px solid var(--border)">
+    <p class="text-xs" style="color:var(--text-muted)">© 2025 Melike Zeynep Şen. Tüm hakları saklıdır.</p>
+    <p class="text-xs" style="color:var(--text-muted)">HTML5, CSS3, JavaScript, PHP & MySQL ile ❤️ yapıldı</p>
+  </div>
+</footer>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║        PROJECT DETAIL MODAL              ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="projectModal" class="modal-backdrop fixed inset-0 z-[100] flex items-center justify-center p-6" style="background:rgba(0,0,0,.6)">
+  <div class="modal-content w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl" style="background:var(--bg-card)">
+    <div class="relative">
+      <img id="modalImage" src="" alt="" class="w-full h-64 object-cover rounded-t-2xl">
+      <button onclick="closeProjectModal()" class="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors">
+        <span class="iconify" data-icon="lucide:x" data-width="20"></span>
+      </button>
+    </div>
+    <div class="p-8">
+      <h3 id="modalTitle" class="font-serif text-2xl font-medium mb-3" style="color:var(--text-primary)"></h3>
+      <div id="modalTechs" class="flex flex-wrap gap-2 mb-4"></div>
+      <p id="modalDesc" class="text-sm leading-relaxed mb-6" style="color:var(--text-secondary)"></p>
+      <div class="flex gap-3">
+        <a id="modalLink" href="#" target="_blank" class="px-6 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-full transition-all">
+          <span class="iconify inline-block mr-1 -mt-0.5" data-icon="lucide:external-link" data-width="14"></span>Canlı Demo
+        </a>
+        <a id="modalGithub" href="#" target="_blank" class="px-6 py-2.5 text-sm font-medium rounded-full transition-all" style="border:1px solid var(--border);color:var(--text-primary)">
+          <span class="iconify inline-block mr-1 -mt-0.5" data-icon="mdi:github" data-width="14"></span>Kaynak Kod
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║        ADMIN LOGIN MODAL                 ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="loginModal" class="modal-backdrop fixed inset-0 z-[100] flex items-center justify-center p-6" style="background:rgba(0,0,0,.6)">
+  <div class="modal-content w-full max-w-md rounded-2xl shadow-2xl p-8" style="background:var(--bg-card)">
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 rounded-2xl bg-brand-500 flex items-center justify-center mx-auto mb-4">
+        <span class="iconify text-white" data-icon="lucide:shield" data-width="28"></span>
+      </div>
+      <h3 class="font-serif text-2xl font-medium" style="color:var(--text-primary)">Admin Girişi</h3>
+      <p class="text-sm mt-2" style="color:var(--text-secondary)">Yönetim paneline erişmek için giriş yapın</p>
+    </div>
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-2" style="color:var(--text-primary)">Kullanıcı Adı</label>
+        <input type="text" id="loginUsername" required placeholder="Kullanıcı adı" class="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-brand-500" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary)">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-2" style="color:var(--text-primary)">Şifre</label>
+        <input type="password" id="loginPassword" required placeholder="Şifre" class="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-brand-500" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary)">
+      </div>
+      <div class="flex items-center gap-2">
+        <input type="checkbox" id="rememberMe" class="w-4 h-4 rounded accent-brand-500">
+        <label for="rememberMe" class="text-sm" style="color:var(--text-secondary)">Beni hatırla</label>
+      </div>
+      <p id="loginError" class="text-red-500 text-sm hidden">Kullanıcı adı veya şifre hatalı!</p>
+      <div class="flex gap-3 pt-2">
+        <button type="submit" class="flex-1 py-3 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-xl transition-all">Giriş Yap</button>
+        <button type="button" onclick="closeLoginModal()" class="px-6 py-3 text-sm font-medium rounded-xl transition-all" style="border:1px solid var(--border);color:var(--text-primary)">İptal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║        ADMIN DASHBOARD OVERLAY           ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div id="adminDashboard" class="admin-overlay fixed inset-0 z-[90] overflow-y-auto" style="background:var(--bg-primary)">
+  <div class="max-w-6xl mx-auto px-6 py-8">
+    <!-- Admin Header -->
+    <header class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="font-serif text-2xl font-medium" style="color:var(--text-primary)">Yönetim Paneli</h2>
+        <p class="text-sm" style="color:var(--text-secondary)">Hoş geldiniz, <span id="adminName" class="font-medium text-brand-500">Admin</span></p>
+      </div>
+      <button onclick="adminLogout()" class="flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl transition-all hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500" style="border:1px solid var(--border)">
+        <span class="iconify" data-icon="lucide:log-out" data-width="16"></span>Çıkış
+      </button>
+    </header>
+    <!-- Admin Tabs -->
+    <div class="flex gap-2 mb-8 border-b" style="border-color:var(--border)">
+      <button class="tab-btn active px-5 py-3 text-sm font-medium border-b-2" style="border-color:var(--accent);color:var(--accent)" data-tab="projects" onclick="switchAdminTab('projects')">Projeler</button>
+      <button class="tab-btn px-5 py-3 text-sm font-medium border-b-2 border-transparent" style="color:var(--text-secondary)" data-tab="messages" onclick="switchAdminTab('messages')">Mesajlar <span id="msgBadge" class="ml-1 px-2 py-0.5 bg-brand-500 text-white text-xs rounded-full">0</span></button>
+    </div>
+    <!-- Projects Tab -->
+    <div id="tabProjects" class="admin-tab">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-medium" style="color:var(--text-primary)">Proje Yönetimi</h3>
+        <button onclick="showProjectForm()" class="flex items-center gap-2 px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-xl transition-all">
+          <span class="iconify" data-icon="lucide:plus" data-width="16"></span>Yeni Proje
+        </button>
+      </div>
+      <!-- Project Form (hidden by default) -->
+      <div id="projectFormContainer" class="hidden mb-8 rounded-2xl p-6" style="background:var(--bg-card);border:1px solid var(--border);box-shadow:var(--shadow)">
+        <h4 id="projectFormTitle" class="font-medium mb-4" style="color:var(--text-primary)">Yeni Proje Ekle</h4>
+        <form id="projectForm" class="grid md:grid-cols-2 gap-4">
+          <input type="hidden" id="projectId">
+          <div><label class="block text-sm font-medium mb-1" style="color:var(--text-primary)">Başlık *</label><input type="text" id="projTitle" required class="w-full px-3 py-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-brand-500" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary)"></div>
+          <div><label class="block text-sm font-medium mb-1" style="color:var(--text-primary)">Teknolojiler *</label><input type="text" id="projTechs" required placeholder="HTML5, CSS3, JavaScript" class="w-full px-3 py-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-brand-500" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary)"></div>
+          <div class="md:col-span-2"><label class="block text-sm font-medium mb-1" style="color:var(--text-primary)">Açıklama *</label><textarea id="projDesc" required rows="3" class="w-full px-3 py-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-brand-500 resize-none" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary)"></textarea></div>
+          <div><label class="block text-sm font-medium mb-1" style="color:var(--text-primary)">Görsel URL</label><input type="text" id="projImage" placeholder="https://..." class="w-full px-3 py-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-brand-500" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary)"></div>
+          <div><label class="block text-sm font-medium mb-1" style="color:var(--text-primary)">Demo Link</label><input type="text" id="projLink" placeholder="https://..." class="w-full px-3 py-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-brand-500" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary)"></div>
+          <div><label class="block text-sm font-medium mb-1" style="color:var(--text-primary)">GitHub Link</label><input type="text" id="projGithub" placeholder="https://github.com/..." class="w-full px-3 py-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-brand-500" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary)"></div>
+          <div class="md:col-span-2 flex gap-3 pt-2">
+            <button type="submit" class="px-6 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-lg transition-all">Kaydet</button>
+            <button type="button" onclick="hideProjectForm()" class="px-6 py-2.5 text-sm font-medium rounded-lg transition-all" style="border:1px solid var(--border);color:var(--text-primary)">İptal</button>
+          </div>
+        </form>
+      </div>
+      <!-- Projects List -->
+      <div id="adminProjectsList" class="space-y-4"></div>
+    </div>
+    <!-- Messages Tab -->
+    <div id="tabMessages" class="admin-tab hidden">
+      <h3 class="text-lg font-medium mb-6" style="color:var(--text-primary)">Gelen Mesajlar</h3>
+      <div id="adminMessagesList" class="space-y-4"></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
